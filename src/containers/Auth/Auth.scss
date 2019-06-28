@@ -1,0 +1,78 @@
+.Home {
+  width: 100%;
+  height: 100vh;
+  //background-color: #f9a14852;
+  background-image: url("/Images/homeBack.jpg");
+  background-position: top;
+  background-size: cover;
+}
+.Header {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #555555d9;
+  transition: all ease .4s;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 20px 0 20px ;
+
+  .home_butt {
+    display: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    height: 40px;
+    width: 80px;
+    background-color: #f9a148;
+    color: #474749;
+    outline: none;
+    border-radius: 25px;
+    margin: 8px 10px 5px 0;
+    border: none;
+    box-shadow: 0 2px 2px rgba(0,0,0,.16);
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all ease .4s;
+
+  }
+}
+
+.log_page {
+  background-color: #3a5ba5;
+
+  .home_butt {
+    display: block;
+  }
+
+  button {
+    background-color: #6d98e2;
+    color: #ecf0f7;
+  }
+}
+
+.reg_page {
+  background-color: #519166;
+
+  .home_butt {
+    display: block;
+  }
+
+  button {
+    background-color: #d6ea93;
+    color: #5f5656;
+  }
+}
+
+.new_reg {
+  background-image: url("/Images/green.png");
+}
+.new_log {
+  background-image: url("/Images/blue.jpg");
+}

@@ -1,0 +1,219 @@
+.Profile {
+
+  .prof_head {
+    width: 100%;
+    height: 45px;
+    background-color: #4a75a8;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+
+    .prof_cont {
+      height: 100%;
+      width: 70%;
+      margin: 0 auto;
+      padding: 0 5px;
+      box-sizing: border-box;
+      //background-color: #1e3c83;
+      display: flex;
+      justify-content: space-between;
+
+      .prof_edit {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 10px;
+        cursor: pointer;
+        transition: all ease .3s;
+
+        &:hover {
+          background-color: #3d6898;
+        }
+
+        span {
+          align-items: center;
+          margin: auto;
+          font-size: 13.5px;
+          color: white;
+          font-weight: bold;
+        }
+
+        svg {
+          font-size: 10px;
+          margin-left: 8px;
+          margin-top: 3px;
+          color: #dadada;
+        }
+
+        .open_div {
+          position: fixed;
+          height: 90px;
+          width: 130px;
+          top: 55px;
+          margin-left: -35px;
+          border-radius: 4px;
+          border: 1px solid #c5d0db;
+          background-color: white;
+          box-shadow: 0 0 8px 0 #c5d0db;
+
+          &:after,
+          &:before {
+            position: absolute;
+            pointer-events: none;
+            border: solid transparent;
+            content: '';
+            height: 0;
+            width: 0;
+            bottom: 100%;
+            right: 40px;
+          }
+          &:before {
+            border-width: 6px;
+            margin: 0 -6px;
+            border-bottom-color: #c5d0db;
+          }
+        }
+
+        .prof_pic {
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+          background-size: cover;
+          background-position: center;
+          //border: 1px solid white;
+          overflow: hidden;
+          cursor: pointer;
+          margin-left: 10px;
+
+          .pic_hov {
+            width: 100%;
+            height: 100%;
+            background-color: #d8d3d3a3;
+            display: flex;
+            opacity: 0;
+            justify-content: center;
+            align-items: center;
+            transition: all ease .3s;
+
+            svg {
+              font-size: 20px;
+              color: black;
+            }
+          }
+          &:hover .pic_hov {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+
+  .upload_cont {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.64);
+
+    .upload_div {
+      width: 450px;
+      height: 550px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 12px 0 #000000b3;
+      background-color: whitesmoke;
+      align-items: center;
+
+      .upload_pic {
+        height: 150px;
+        width: 150px;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        border: 2px solid #b4b4b4;
+        overflow: hidden;
+        margin: 30px auto;
+      }
+
+      .choose_div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 70%;
+        height: 30px;
+        margin: 50px auto;
+
+        .img_preview {
+          height: 80px;
+          width: 80px;
+          border-radius: 50%;
+          transition: all ease .5s;
+          position: absolute;
+          background-position: center;
+          background-size: cover;
+          margin-left: -50px;
+          margin-top: -85px;
+          opacity: 0;
+        }
+
+        button {
+          border: none;
+          background-color: #f97048;
+          width: 80px;
+          border-radius: 4px;
+          color: white;
+          font-weight: bold;
+          font-size: 14px;
+          cursor: pointer;
+          transition: all ease .3s;
+
+          &:hover {
+            background-color: #ff4b35;
+          }
+        }
+
+        label {
+          display: flex;
+          flex-direction: row;
+
+          &:hover ~ .img_preview {
+            opacity: 1;
+          }
+          input {
+            display: none;
+          }
+          div {
+            width: 145px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            font-size: 14px;
+            background-color: #d3394c;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all ease .3s;
+
+
+            &:hover {
+              background-color: #722040;
+            }
+
+            }
+
+            span {
+              margin-left: 10px;
+            }
+            svg {
+              font-size: 16px;
+            }
+
+          }
+        }
+      }
+    }
+}

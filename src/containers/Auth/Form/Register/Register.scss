@@ -1,0 +1,135 @@
+.Conf {
+  height: 150px;
+  width: 300px;
+  margin: 0 auto;
+  background: whitesmoke;
+  border-radius: 4px;
+  box-shadow: 0 0 8px 0 #28402f;
+  padding: 10px 20px;
+  box-sizing: border-box;
+
+  p {
+    font-size: 18px;
+    color: #09782d;
+    font-weight: bold;
+    margin-bottom: 50px;
+  }
+
+  a {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #adcc44;
+    text-decoration: none;
+    color: whitesmoke;
+    border-radius: 4px;
+    transition: all ease .3s;
+
+    &:hover {
+      background-color: #2d782e;
+    }
+  }
+}
+
+.Parent {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.signUp {
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: 550px;
+  height: 450px;
+  box-shadow: 0 0 10px 5px #09101052;
+
+  .regField {
+    padding: 45px 0 30px 40px;
+    width: 65%;
+    position: relative;
+    background-image: url("/Images/regBack.png");
+    background-size: cover;
+    background-position: center;
+  }
+
+  input {
+    display: block;
+    border-radius: 1px;
+    background: rgba(0, 0, 0, 0);
+    border: 0;
+    border-bottom: 1px solid rgba(33, 14, 78, 0.24);
+    outline: none;
+    font-size: 16px;
+    padding: 8px 8px;
+    width: 82%;
+    margin-top: 50px;
+    transition: all ease .2s;
+
+    &:focus {
+      border-bottom: 1px solid rgba(33, 14, 78, 0.99);
+    }
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+  }
+
+  button {
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    width: 80px;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-left: -5px;
+    border-radius: 10px;
+    background-color: #79b187;
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    transition: all ease .5s;
+
+    &:hover {
+      background-color: #14473b;
+      color: #c8e68f;
+    }
+  }
+}
+
+.pass {
+  position: relative;
+
+  .regSvg {
+    position: absolute;
+    font-size: 25px;
+    bottom: 5px;
+    right: 65px;
+    cursor: pointer;
+    color: #509166;
+  }
+}
+
+.LeftReg {
+  height: 100%;
+  width: 37%;
+  overflow: hidden;
+  background-image: url("/Images/leftReg.png");
+  background-size: cover;
+  background-position: center;
+
+  p {
+    color: #596f5f;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 50px;
+  }
+}
