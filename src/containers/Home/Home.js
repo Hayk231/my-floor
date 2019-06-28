@@ -109,12 +109,17 @@ class Home extends Component {
         if (this.state.spinner) {
             changeComp = <Spinner/>
         }
+        let active = null;
+        if (this.state.open === 1) {
+            active = 'active';
+        }
+
         return (
             <div className='Profile'>
                 <div className='prof_head'>
                     <div className='prof_cont'>
                         <span>Logo</span>
-                        <div className='prof_edit' onClick={this.openDiv}>
+                        <div className={`prof_edit ${active}`} onClick={this.openDiv}>
                             <span>{name}</span>
                             <div style={{backgroundImage: `url(${this.state.profImg})`}} className='prof_pic'>
                                 <div className='pic_hov' onClick={this.uploadShow}>
