@@ -3,19 +3,48 @@
   .prof_head {
     width: 100%;
     height: 45px;
-    background-color: #4a75a8;
+    //background-color: #4a75a8;
+    background-color: #243748;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
 
     .prof_cont {
       height: 100%;
-      width: 70%;
+      width: 75%;
       margin: 0 auto;
       padding: 0 5px;
       box-sizing: border-box;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        cursor: pointer;
+
+        svg:first-child {
+          font-size: 35px;
+          color: white;
+          transition: all ease .4s;
+        }
+
+        svg:last-child {
+          color: #ffa168;
+          margin-bottom: 23px;
+          font-size: 16px;
+          transition: all ease .4s;
+          opacity: 0;
+        }
+
+        &:hover {
+          svg:first-child {
+            color: #d6b68b;
+          }
+          svg:last-child {
+            opacity: 1;
+          }
+        }
+      }
 
       .prof_edit {
         display: flex;
@@ -24,9 +53,11 @@
         padding: 0 10px;
         cursor: pointer;
         transition: all ease .3s;
+        height: 100%;
 
         &:hover {
-          background-color: #3d6898;
+          //background-color: #3d6898;
+          background-color: #12212f;
         }
 
         span {
@@ -35,6 +66,8 @@
           font-size: 13.5px;
           color: white;
           font-weight: bold;
+          overflow: hidden;
+          width: 41px;
         }
 
         svg {
@@ -46,10 +79,10 @@
 
         .open_div {
           position: fixed;
-          height: 90px;
+          //height: 90px;
           width: 130px;
           top: 55px;
-          margin-left: -41px;
+          margin-left: -25px;
           border-radius: 4px;
           border: 1px solid #c5d0db;
           background-color: white;
@@ -73,6 +106,33 @@
             margin: 0 -6px;
             border-bottom-color: #c5d0db;
           }
+
+          div {
+            font-size: 12px;
+            color: #4a75a8;
+            text-align: left;
+            padding: 10px 0 10px 5px;
+            border-bottom: 1px solid #c5d0db;
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+
+            &:last-child {
+              border: none;
+            }
+
+            svg {
+              color: #696969;
+              font-size: 11px;
+              opacity: 0;
+              transition: all ease .5s;
+            }
+
+            &:hover svg {
+              opacity: 1;
+            }
+          }
         }
 
         .prof_pic {
@@ -81,33 +141,13 @@
           border-radius: 50%;
           background-size: cover;
           background-position: center;
-          //border: 1px solid white;
           overflow: hidden;
           cursor: pointer;
           margin-left: 10px;
-
-          .pic_hov {
-            width: 100%;
-            height: 100%;
-            background-color: #d8d3d3a3;
-            display: flex;
-            opacity: 0;
-            justify-content: center;
-            align-items: center;
-            transition: all ease .3s;
-
-            svg {
-              font-size: 20px;
-              color: black;
-            }
-          }
-          &:hover .pic_hov {
-            opacity: 1;
-          }
         }
       }
       .active {
-        background-color: #3d6898;
+        background-color: #12212f;
       }
     }
   }
@@ -144,11 +184,9 @@
 
       .choose_div {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 70%;
-        height: 30px;
-        margin: 50px auto;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
 
         .img_preview {
           height: 80px;
@@ -163,25 +201,39 @@
           opacity: 0;
         }
 
-        button {
-          border: none;
-          background-color: #f97048;
-          width: 80px;
-          border-radius: 4px;
-          color: white;
-          font-weight: bold;
-          font-size: 14px;
-          cursor: pointer;
-          transition: all ease .3s;
+        .buttons {
+          button {
+            border: none;
+            background-color: #2a4b87;
+            width: 80px;
+            padding: 7px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all ease .3s;
+            margin: 10px;
 
-          &:hover {
-            background-color: #ff4b35;
+            &:hover {
+              background-color: #1b2e58;
+            }
+
+            &:last-child {
+              background-color: #ff6028;
+
+              &:hover {
+                background-color: #ff2021;
+              }
+            }
           }
         }
+
 
         label {
           display: flex;
           flex-direction: row;
+          margin-bottom: 30px;
 
           &:hover ~ .img_preview {
             opacity: 1;
@@ -191,6 +243,7 @@
           }
           div {
             width: 145px;
+            height: 30px;
             align-items: center;
             display: flex;
             justify-content: center;
@@ -215,8 +268,51 @@
             svg {
               font-size: 16px;
             }
-
           }
+        .name {
+          padding: 0 0 30px 0;
+          position: relative;
+
+          svg {
+            font-size: 18px;
+            color: #d33a4c;
+            margin-left: 8px;
+            cursor: pointer;
+
+            &:hover + .prompt{
+              opacity: 1;
+            }
+          }
+          input {
+            height: 30px;
+            background-color: #0000002e;
+            border: 1px solid #0000002e;
+            border-radius: 4px;
+            padding: 5px;
+            box-sizing: border-box;
+            transition: all ease .4s;
+          }
+          .editable {
+            background-color: transparent;
+            border: 1px solid #d33a4c;
+          }
+          .prompt {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #d33a4c;
+            font-size: 12px;
+            right: -45px;
+            bottom: 58px;
+            border: 1px solid #d33a4c;
+            border-radius: 50%;
+            padding: 12px 7px;
+            transition: all ease .5s;
+            opacity: 0;
+          }
+        }
         }
       }
     }

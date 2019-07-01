@@ -1,12 +1,19 @@
-import React , { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import './Home.scss';
 import { connect } from "react-redux";
 import firebase from 'firebase';
-import { faImages } from '@fortawesome/free-regular-svg-icons';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faMeteor } from '@fortawesome/free-solid-svg-icons';
+import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
+import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from '../../components/Spinner/Spinner';
+import Main from "./Main/Main";
 
 class Home extends Component {
 
@@ -22,7 +29,8 @@ class Home extends Component {
         imgLink: false,
         setName: '',
         spinner: null,
-        open: 0
+        open: 0,
+        edit: false
     };
 
     componentDidMount() {
@@ -35,8 +43,10 @@ class Home extends Component {
     }
 
     uploadImage = () => {
-        if (this.state.setName) {
-            localStorage.setItem('userName', this.state.setName);
+        let name = this.state.setName ? this.state.setName : localStorage.getItem('userName');
+        if (name) {
+            localStorage.setItem('userName', name);
+            this.popImage(null, name);
         }
         const file = this.imageInput.current.files[0];
         if (file) {
@@ -46,22 +56,28 @@ class Home extends Component {
             mainImage.put(file).then(() => {
                 storageRef.child(file.name).getDownloadURL().then((url) => {
                     this.setState({fileUrl: url});
-                    this.popImage(url);
+                    this.popImage(url, name);
                 })
             });
         }
         this.setState({show: false, buttText: false});
     };
 
-    popImage = (imgUrl) => {
+    popImage = (imgUrl, name) => {
         let userKey = localStorage.getItem('userKey');
         let userRef = firebase.database().ref('userId/' + userKey);
-        userRef.update({profPic: imgUrl})
-            .then(res => {
-                setTimeout(() => {
-                    this.setState({spinner: false});
-                },1500);
-            });
+        if (imgUrl) {
+            userRef.update({profPic: imgUrl, name: name})
+                .then(res => {
+                    setTimeout(() => {
+                        this.setState({spinner: false});
+                    },2000);
+                });
+        } else {
+            userRef.update({name: name})
+                .then(res => {});
+        }
+
     };
 
     uploadShow = () => {
@@ -84,7 +100,21 @@ class Home extends Component {
     };
 
     openDiv = () => {
-        this.setState({open: 1})
+        if (this.state.open === 0 ) {
+            this.setState({open: 1})
+        } else {
+            this.setState({open: 0})
+        }
+    };
+
+    editName = () => {
+        this.setState({edit: true});
+    };
+
+    cancelHandler = (e) => {
+        // e.preventDefault();
+        // this.imageInput.current.files[0] = null;
+        // this.setState({buttText: true, edit: false})
     };
 
     render() {
@@ -103,7 +133,7 @@ class Home extends Component {
             prev_image = this.state.imgLink;
         }
 
-        let name = localStorage.getItem('userName');
+        let name = localStorage.getItem('userName').split(' ')[0];
 
         let changeComp = null;
         if (this.state.spinner) {
@@ -113,21 +143,32 @@ class Home extends Component {
         if (this.state.open === 1) {
             active = 'active';
         }
+        let editable = true;
+        let newClass = null;
+        if (this.state.edit) {
+            newClass = 'editable';
+            editable = false;
+        }
 
         return (
-            <div className='Profile'>
+            <Fragment>
+                <div className='Profile'>
                 <div className='prof_head'>
                     <div className='prof_cont'>
-                        <span>Logo</span>
+                        <div className='logo'>
+                            <FontAwesomeIcon icon={faUserAstronaut}/>
+                            <FontAwesomeIcon icon={faMeteor}/>
+                        </div>
                         <div className={`prof_edit ${active}`} onClick={this.openDiv}>
                             <span>{name}</span>
-                            <div style={{backgroundImage: `url(${this.state.profImg})`}} className='prof_pic'>
-                                <div className='pic_hov' onClick={this.uploadShow}>
-                                    <FontAwesomeIcon icon={faImages} />
-                                </div>
-                            </div>
+                            <div style={{backgroundImage: `url(${this.state.profImg})`}} className='prof_pic'></div>
                             <FontAwesomeIcon icon={faChevronDown}/>
-                            <div className='open_div' style={{transform: `scaleY(${this.state.open})`}}></div>
+                            <div className='open_div' style={{transform: `scaleY(${this.state.open})`}}>
+                                <div>My Profile <FontAwesomeIcon icon={faUserCircle}/></div>
+                                <div onClick={this.uploadShow}>Edit Profile <FontAwesomeIcon icon={faUserEdit}/></div>
+                                <div>Settings <FontAwesomeIcon icon={faCogs}/></div>
+                                <div>Log out <FontAwesomeIcon icon={faSignOutAlt}/></div>
+                            </div>
                         </div>
                     </div>
 
@@ -143,15 +184,23 @@ class Home extends Component {
                                     <span>{text}</span>
                                 </div>
                             </label>
-                            <button onClick={this.uploadImage}>Change</button>
-                        </div>
-                        <div>
-                            <input type='text' defaultValue={name} onChange={this.setName}/>
+                            <div className='name'>
+                                <input className={newClass} type='text' defaultValue={name} onChange={this.setName} readOnly={editable}/>
+                                    <FontAwesomeIcon icon={faPenFancy} onClick={this.editName}/>
+                                    <div className='prompt'>Edit</div>
+                            </div>
+                            <div className='buttons'>
+                                <button onClick={this.uploadImage}>Change</button>
+                                <button onClick={this.cancelHandler}>Cancel</button>
+                            </div>
                         </div>
                     </div>
+                    </div>
+                    {changeComp}
                 </div>
-                {changeComp}
-            </div>
+                <Main/>
+            </Fragment>
+
         );
     }
 }
