@@ -14,12 +14,14 @@ import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from '../../components/Spinner/Spinner';
 import Main from "./Main/Main";
+import {NavLink} from "react-router-dom";
 
 class Home extends Component {
 
     constructor(props){
         super(props);
         this.imageInput = React.createRef();
+        this.nameRef = React.createRef();
     }
     state = {
         fileUrl: null,
@@ -111,10 +113,9 @@ class Home extends Component {
         this.setState({edit: true});
     };
 
-    cancelHandler = (e) => {
-        // e.preventDefault();
-        // this.imageInput.current.files[0] = null;
-        // this.setState({buttText: true, edit: false})
+    cancelHandler = () => {
+        this.nameRef.current.reset();
+        this.setState({show: false, buttText: false, edit: false, imgLink: this.state.profImg});
     };
 
     render() {
@@ -145,9 +146,11 @@ class Home extends Component {
         }
         let editable = true;
         let newClass = null;
+        let showed_text = null;
         if (this.state.edit) {
             newClass = 'editable';
             editable = false;
+            showed_text = 'showed_text';
         }
 
         return (
@@ -178,16 +181,19 @@ class Home extends Component {
                         <div style={{backgroundImage: `url(${prev_image})`}} className='upload_pic'></div>
                         <div className='choose_div'>
                             <label className='choose'>
-                                <input type='file' ref={this.imageInput} onChange={this.fileChange} accept="image/*"/>
+                                    <input type='file' ref={this.imageInput} onChange={this.fileChange} accept="image/*"/>
                                 <div>
                                     <FontAwesomeIcon icon={faCloudUploadAlt} />
                                     <span>{text}</span>
                                 </div>
                             </label>
                             <div className='name'>
-                                <input className={newClass} type='text' defaultValue={name} onChange={this.setName} readOnly={editable}/>
-                                    <FontAwesomeIcon icon={faPenFancy} onClick={this.editName}/>
-                                    <div className='prompt'>Edit</div>
+                                <form ref={this.nameRef}>
+                                    <input className={newClass} type='text' defaultValue={name} onChange={this.setName} readOnly={editable}/>
+                                </form>
+                                <div className={`show_text ${showed_text}`} onClick={this.editName}>
+                                    <FontAwesomeIcon icon={faPenFancy}/>
+                                </div>
                             </div>
                             <div className='buttons'>
                                 <button onClick={this.uploadImage}>Change</button>
@@ -199,6 +205,7 @@ class Home extends Component {
                     {changeComp}
                 </div>
                 <Main/>
+
             </Fragment>
 
         );
