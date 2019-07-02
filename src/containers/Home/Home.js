@@ -10,15 +10,18 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
+import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from '../../components/Spinner/Spinner';
 import Main from "./Main/Main";
+import {Link} from "react-router-dom";
 
 class Home extends Component {
 
     constructor(props){
         super(props);
         this.imageInput = React.createRef();
+        this.nameRef = React.createRef();
     }
     state = {
         fileUrl: null,
@@ -28,16 +31,23 @@ class Home extends Component {
         imgLink: false,
         setName: '',
         spinner: null,
-        open: 0
+        open: 0,
+        edit: false,
+        name: ''
     };
 
     componentDidMount() {
+        let logged = localStorage.getItem('logged');
+        if (logged === 'false') {
+            window.location.replace('/auth/login');
+        }
         let userKey = localStorage.getItem('userKey');
         let userRef = firebase.database().ref('userId/' + userKey);
         userRef.on('value', snapshot => {
             let val = snapshot.val().profPic;
             this.setState({profImg: val});
         });
+        this.setState({name: localStorage.getItem('userName').split(' ')[0]})
     }
 
     uploadImage = () => {
@@ -105,6 +115,21 @@ class Home extends Component {
         }
     };
 
+    editName = () => {
+        this.setState({edit: true});
+    };
+
+    cancelHandler = () => {
+        this.nameRef.current.reset();
+        this.setState({show: false, buttText: false, edit: false, imgLink: this.state.profImg});
+    };
+
+    logoutHandler = () => {
+        localStorage.clear();
+        localStorage.setItem('logged', 'false');
+        window.location.replace('/auth/login');
+    };
+
     render() {
         let show = 'none';
         if (this.state.show) {
@@ -121,7 +146,7 @@ class Home extends Component {
             prev_image = this.state.imgLink;
         }
 
-        let name = localStorage.getItem('userName').split(' ')[0];
+        // let name = localStorage.getItem('userName').split(' ')[0];
 
         let changeComp = null;
         if (this.state.spinner) {
@@ -130,6 +155,14 @@ class Home extends Component {
         let active = null;
         if (this.state.open === 1) {
             active = 'active';
+        }
+        let editable = true;
+        let newClass = null;
+        let showed_text = null;
+        if (this.state.edit) {
+            newClass = 'editable';
+            editable = false;
+            showed_text = 'showed_text';
         }
 
         return (
@@ -142,14 +175,14 @@ class Home extends Component {
                             <FontAwesomeIcon icon={faMeteor}/>
                         </div>
                         <div className={`prof_edit ${active}`} onClick={this.openDiv}>
-                            <span>{name}</span>
+                            <span>{this.state.name}</span>
                             <div style={{backgroundImage: `url(${this.state.profImg})`}} className='prof_pic'></div>
                             <FontAwesomeIcon icon={faChevronDown}/>
                             <div className='open_div' style={{transform: `scaleY(${this.state.open})`}}>
-                                <div>My Profile <FontAwesomeIcon icon={faUserCircle}/></div>
+                                <Link to={'/home/profile'} ><div>My Profile <FontAwesomeIcon icon={faUserCircle}/></div></Link>
                                 <div onClick={this.uploadShow}>Edit Profile <FontAwesomeIcon icon={faUserEdit}/></div>
-                                <div>Settings <FontAwesomeIcon icon={faCogs}/></div>
-                                <div>Log out <FontAwesomeIcon icon={faSignOutAlt}/></div>
+                                <Link to={'/home/settings'}><div>Settings <FontAwesomeIcon icon={faCogs}/></div></Link>
+                                <div style={{border: 'none'}} onClick={this.logoutHandler}>Log out <FontAwesomeIcon icon={faSignOutAlt}/></div>
                             </div>
                         </div>
                     </div>
@@ -160,16 +193,24 @@ class Home extends Component {
                         <div style={{backgroundImage: `url(${prev_image})`}} className='upload_pic'></div>
                         <div className='choose_div'>
                             <label className='choose'>
-                                <input type='file' ref={this.imageInput} onChange={this.fileChange} accept="image/*"/>
+                                    <input type='file' ref={this.imageInput} onChange={this.fileChange} accept="image/*"/>
                                 <div>
                                     <FontAwesomeIcon icon={faCloudUploadAlt} />
                                     <span>{text}</span>
                                 </div>
                             </label>
                             <div className='name'>
-                                <input type='text' defaultValue={name} onChange={this.setName} readOnly={true}/>
+                                <form ref={this.nameRef}>
+                                    <input className={newClass} type='text' defaultValue={this.state.name} onChange={this.setName} readOnly={editable}/>
+                                </form>
+                                <div className={`show_text ${showed_text}`} onClick={this.editName}>
+                                    <FontAwesomeIcon icon={faPenFancy}/>
+                                </div>
                             </div>
-                            <button onClick={this.uploadImage}>Change</button>
+                            <div className='buttons'>
+                                <button onClick={this.uploadImage}>Change</button>
+                                <button onClick={this.cancelHandler}>Cancel</button>
+                            </div>
                         </div>
                     </div>
                     </div>

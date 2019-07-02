@@ -50,7 +50,8 @@ class Login extends Component {
                             this.props.history.push('/home');
                         }
                     }
-                })
+                });
+                localStorage.setItem('logged', 'true');
             })
     };
 
