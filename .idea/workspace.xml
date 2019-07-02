@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7c2da2f-6794-44e4-9051-1a0369e282fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/Center/Center.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/Center/Center.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/LeftBar/LeftBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/LeftBar/LeftBar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/Main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/RightBar/RightBar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Home/Main/RightBar/RightBar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-    </list>
+    <list default="true" id="e7c2da2f-6794-44e4-9051-1a0369e282fb" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -41,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/Home/Home.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="260" column="38" selection-start-line="260" selection-start-column="38" selection-end-line="260" selection-end-column="38" />
+            <state relative-caret-position="84">
+              <caret line="260" selection-start-line="260" selection-end-line="260" />
             </state>
           </provider>
         </entry>
@@ -234,18 +221,17 @@
       <workItem from="1561795981775" duration="87000" />
       <workItem from="1561799216167" duration="42000" />
       <workItem from="1561799398926" duration="9000" />
-      <workItem from="1561799452141" duration="30726000" />
+      <workItem from="1561799452141" duration="30905000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33051000" />
+    <option name="totallyTimeSpent" value="33230000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="25" width="1315" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -259,7 +245,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.47166666" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.47166666" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -361,8 +347,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/Home/Home.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="260" column="38" selection-start-line="260" selection-start-column="38" selection-end-line="260" selection-end-column="38" />
+        <state relative-caret-position="84">
+          <caret line="260" selection-start-line="260" selection-end-line="260" />
         </state>
       </provider>
     </entry>
