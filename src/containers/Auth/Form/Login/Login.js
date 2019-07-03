@@ -74,6 +74,7 @@ class Login extends Component {
     };
 
     render() {
+        console.log(this.props.usName)
         let show = 'password';
         let opacity = '0.5';
         if (this.state.showed) {

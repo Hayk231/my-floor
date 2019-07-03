@@ -11,6 +11,7 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 import { faPenFancy } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Spinner from '../../components/Spinner/Spinner';
 import Main from "./Main/Main";
@@ -33,7 +34,8 @@ class Home extends Component {
         spinner: null,
         open: 0,
         edit: false,
-        name: ''
+        name: '',
+        search: null
     };
 
     componentDidMount() {
@@ -54,6 +56,7 @@ class Home extends Component {
         let name = this.state.setName ? this.state.setName : localStorage.getItem('userName');
         if (name) {
             localStorage.setItem('userName', name);
+            this.setState({name: name});
             this.popImage(null, name);
         }
         const file = this.imageInput.current.files[0];
@@ -130,6 +133,14 @@ class Home extends Component {
         window.location.replace('/auth/login');
     };
 
+    openSearch = () => {
+        if (this.state.search === null) {
+            this.setState({search: 'open'})
+        } else {
+            this.setState({search: null})
+        }
+    };
+
     render() {
         let show = 'none';
         if (this.state.show) {
@@ -145,8 +156,6 @@ class Home extends Component {
         if (this.state.imgLink) {
             prev_image = this.state.imgLink;
         }
-
-        // let name = localStorage.getItem('userName').split(' ')[0];
 
         let changeComp = null;
         if (this.state.spinner) {
@@ -170,19 +179,27 @@ class Home extends Component {
                 <div className='Profile'>
                 <div className='prof_head'>
                     <div className='prof_cont'>
-                        <div className='logo'>
-                            <FontAwesomeIcon icon={faUserAstronaut}/>
-                            <FontAwesomeIcon icon={faMeteor}/>
-                        </div>
-                        <div className={`prof_edit ${active}`} onClick={this.openDiv}>
-                            <span>{this.state.name}</span>
-                            <div style={{backgroundImage: `url(${this.state.profImg})`}} className='prof_pic'></div>
-                            <FontAwesomeIcon icon={faChevronDown}/>
-                            <div className='open_div' style={{transform: `scaleY(${this.state.open})`}}>
-                                <Link to={'/home/profile'} ><div>My Profile <FontAwesomeIcon icon={faUserCircle}/></div></Link>
-                                <div onClick={this.uploadShow}>Edit Profile <FontAwesomeIcon icon={faUserEdit}/></div>
-                                <Link to={'/home/settings'}><div>Settings <FontAwesomeIcon icon={faCogs}/></div></Link>
-                                <div style={{border: 'none'}} onClick={this.logoutHandler}>Log out <FontAwesomeIcon icon={faSignOutAlt}/></div>
+                        <Link to={'/home/feed'}>
+                            <div className='logo'>
+                                <FontAwesomeIcon icon={faUserAstronaut}/>
+                                <FontAwesomeIcon icon={faMeteor}/>
+                            </div>
+                        </Link>
+                        <div className='right_sight'>
+                            <div className={`search_user ${this.state.search}`}>
+                                <input type='text'/>
+                                <FontAwesomeIcon icon={faSearch} onClick={this.openSearch}/>
+                            </div>
+                            <div className={`prof_edit ${active}`} onClick={this.openDiv}>
+                                <span>{this.state.name}</span>
+                                <div style={{backgroundImage: `url(${this.state.profImg})`}} className='prof_pic'></div>
+                                <FontAwesomeIcon icon={faChevronDown}/>
+                                <div className='open_div' style={{transform: `scaleY(${this.state.open})`}}>
+                                    <Link to={'/home/profile'} ><div>My Profile <FontAwesomeIcon icon={faUserCircle}/></div></Link>
+                                    <div onClick={this.uploadShow}>Edit Profile <FontAwesomeIcon icon={faUserEdit}/></div>
+                                    <Link to={'/home/settings'}><div>Settings <FontAwesomeIcon icon={faCogs}/></div></Link>
+                                    <div style={{border: 'none'}} onClick={this.logoutHandler}>Log out <FontAwesomeIcon icon={faSignOutAlt}/></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -216,7 +233,7 @@ class Home extends Component {
                     </div>
                     {changeComp}
                 </div>
-                <Main/>
+                <Main name={this.state.name}/>
             </Fragment>
 
         );

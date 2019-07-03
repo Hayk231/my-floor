@@ -1,0 +1,11 @@
+.chat {
+  width: 100%;
+  .chat_show {
+    width: 100%;
+    overflow: scroll;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+
+}
