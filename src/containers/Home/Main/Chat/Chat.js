@@ -2,39 +2,80 @@ import React, { Component } from 'react';
 import './Chat.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import firebase from 'firebase';
 
 class Chat extends Component {
     state = {
         text: '',
         chat: [],
-        name: localStorage.getItem('userName')
+        name: localStorage.getItem('userName'),
+        profImg: null
     };
+
+    componentDidMount() {
+        let userKey = localStorage.getItem('userKey');
+        let userRef = firebase.database().ref('userId/' + userKey);
+        userRef.on('value', snapshot => {
+            let val = snapshot.val().profPic;
+            this.setState({profImg: val});
+        });
+        firebase.database().ref('/Chat').on('value',snapshot => {
+            let allChat = snapshot.val();
+            let chatArr = [];
+            for (let key in allChat) {
+                chatArr.push(allChat[key]);
+            }
+            this.setState({chat: chatArr});
+        })
+    }
 
     tapText = (e) => {
         this.setState({text: e.target.value})
     };
+    
+    onKeyPress = (e) => {
+        if (e.which === 13) {
+            this.sendMessage();
+        }
+    };
 
     sendMessage = () => {
-        const chatArr = this.state.chat;
-        chatArr.push(this.state.text);
-        this.setState({chat: chatArr});
+        firebase.database().ref('Chat').push({
+            name: this.state.name,
+            message: this.state.text,
+            image: this.state.profImg
+        }).then(res => {
+            firebase.database().ref('/Chat').on('value',snapshot => {
+                let allChat = snapshot.val();
+                let chatArr = [];
+                for (let key in allChat) {
+                    chatArr.push(allChat[key]);
+                }
+                this.setState({chat: chatArr});
+            })
+        })
     };
 
     render() {
+        let val = this.state.chat.map(el => {
+            return el.image;
+        });
+        console.log(val);
 
         return(
             <div className='chat'>
                 <div className='chat_show'>
                     {this.state.chat.map(el => {
                         return (
-                            <div>
-                                <p key={`${el}12`}>{this.state.name}</p>
-                                <p key={el}>{el}</p>
+                            <div key={'_' + Math.random().toString(36).substr(2, 9)} className='messages'>
+                                <div style={{backgroundImage: `url(${el.image})`}}></div>
+                                <p>{el.name}</p>
+                                <p>{el.message}</p>
                             </div>)
                     })}
                 </div>
-                <input type='text' placeholder='Write a message' onChange={this.tapText}/>
-                <button onClick={this.sendMessage}><FontAwesomeIcon icon={faPaperPlane}/></button>
+                <input type='text' placeholder='Write a message' onChange={this.tapText} onKeyPress={this.onKeyPress}/>
+                <button onClick={this.sendMessage}><FontAwesomeIcon icon={faPaperPlane} /></button>
             </div>
         );
     }
