@@ -10,6 +10,8 @@ class Chat extends Component {
         super(props);
         this.clearInput = React.createRef();
         this.scrollEnd = React.createRef();
+        this.messInput = React.createRef();
+
     }
 
     state = {
@@ -30,15 +32,14 @@ class Chat extends Component {
             let allChat = snapshot.val();
             let chatArr = [];
             for (let key in allChat) {
-                chatArr.push(allChat[key]);
+                let obj = allChat[key];
+                obj.key = key;
+                chatArr.push(obj);
             }
             this.setState({chat: chatArr});
+            this.scrollEnd.current.scrollTop = this.scrollEnd.current.scrollHeight;
         })
     }
-
-    tapText = (e) => {
-        this.setState({text: e.target.value})
-    };
     
     onKeyPress = (e) => {
         if (e.which === 13) {
@@ -49,17 +50,21 @@ class Chat extends Component {
 
     sendMessage = (e) => {
         e.preventDefault();
+        let inpVal = this.messInput.current.value;
         this.clearInput.current.reset();
         firebase.database().ref('Chat').push({
             name: this.state.name,
-            message: this.state.text,
+            message: inpVal,
             image: this.state.profImg
-        }).then(res => {
+        }).then(response => {
+            console.log(response.key);
             firebase.database().ref('/Chat').on('value',snapshot => {
                 let allChat = snapshot.val();
                 let chatArr = [];
                 for (let key in allChat) {
-                    chatArr.push(allChat[key]);
+                    let obj = allChat[key];
+                    obj.key = key;
+                    chatArr.push(obj);
                 }
                 this.setState({chat: chatArr});
                 this.scrollEnd.current.scrollTop = this.scrollEnd.current.scrollHeight;
@@ -74,7 +79,7 @@ class Chat extends Component {
                 <div className='chat_show' ref={this.scrollEnd}>
                     {this.state.chat.map(el => {
                         return (
-                            <div key={'_' + Math.random().toString(36).substr(2, 9)} className='messages'>
+                            <div key={el.key} className='messages'>
                                 <div style={{backgroundImage: `url(${el.image})`}} className='prof_img'></div>
                                 <div className='text'>
                                     {/*<span>{el.name}</span>*/}
@@ -85,7 +90,7 @@ class Chat extends Component {
                     })}
                 </div>
                 <form ref={this.clearInput}>
-                    <input type='text' placeholder='Write a message' onChange={this.tapText} onKeyPress={this.onKeyPress}/>
+                    <input type='text' placeholder='Write a message' onKeyPress={this.onKeyPress} ref={this.messInput}/>
                     <button onClick={this.sendMessage}><FontAwesomeIcon icon={faPaperPlane} /></button>
                 </form>
             </div>

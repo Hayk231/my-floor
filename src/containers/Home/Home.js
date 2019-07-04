@@ -23,6 +23,7 @@ class Home extends Component {
         super(props);
         this.imageInput = React.createRef();
         this.nameRef = React.createRef();
+        this.changeRef = React.createRef();
     }
     state = {
         fileUrl: null,
@@ -53,7 +54,7 @@ class Home extends Component {
     }
 
     uploadImage = () => {
-        let name = this.state.setName ? this.state.setName : localStorage.getItem('userName');
+        let name = this.changeRef.current.value ? this.changeRef.current.value : localStorage.getItem('userName');
         if (name) {
             localStorage.setItem('userName', name);
             this.setState({name: name});
@@ -75,6 +76,7 @@ class Home extends Component {
     };
 
     popImage = (imgUrl, name) => {
+        console.log(imgUrl);
         let userKey = localStorage.getItem('userKey');
         let userRef = firebase.database().ref('userId/' + userKey);
         if (imgUrl) {
@@ -218,7 +220,7 @@ class Home extends Component {
                             </label>
                             <div className='name'>
                                 <form ref={this.nameRef}>
-                                    <input className={newClass} type='text' defaultValue={this.state.name} onChange={this.setName} readOnly={editable}/>
+                                    <input className={newClass} type='text' defaultValue={this.state.name} onChange={this.setName} readOnly={editable} ref={this.changeRef}/>
                                 </form>
                                 <div className={`show_text ${showed_text}`} onClick={this.editName}>
                                     <FontAwesomeIcon icon={faPenFancy}/>
