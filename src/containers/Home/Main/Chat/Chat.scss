@@ -6,13 +6,30 @@
     height: 200px;
     display: flex;
     flex-direction: column;
+    background-color: #85a4b7;
 
     .messages {
-      div {
-        height: 50px;
-        width: 50px;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      margin: 10px auto;
+      padding: 0 10px;
+      box-sizing: border-box;
+      .prof_img {
+        height: 30px;
+        width: 30px;
         border-radius: 50%;
         background-size: cover;
+      }
+
+      .text {
+        width: 80%;
+        text-align: left;
+        padding: 5px;
+        background-color: white;
+        border-radius: 5px;
+        margin-left: 8px;
+        word-wrap: break-word;
       }
     }
   }
