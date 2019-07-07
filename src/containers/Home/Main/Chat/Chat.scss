@@ -1,12 +1,39 @@
 .chat {
   width: 100%;
+
   .chat_show {
-    width: 100%;
-    overflow: scroll;
-    height: 200px;
+    width: 60%;
+    margin: 0 auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px;
     display: flex;
+    border-radius: 5px;
     flex-direction: column;
-    background-color: #85a4b7;
+    background-color: white;
+    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+      transition: all ease .5s;
+
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: 5px;
+    }
+    &:hover {
+      &::-webkit-scrollbar-thumb{
+        background-color: #687ecd;
+      }
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #89a1ff;
+    }
+
 
     .messages {
       display: flex;
@@ -15,23 +42,135 @@
       margin: 10px auto;
       padding: 0 10px;
       box-sizing: border-box;
+      align-items: center;
+
       .prof_img {
-        height: 30px;
-        width: 30px;
+        height: 35px;
+        width: 35px;
         border-radius: 50%;
         background-size: cover;
       }
 
       .text {
-        width: 80%;
+        max-width: 60%;
+        position: relative;
         text-align: left;
-        padding: 5px;
-        background-color: white;
-        border-radius: 5px;
-        margin-left: 8px;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        background-color: #d6d6d6;
+        border-radius: 20px;
+        margin-left: 5px;
         word-wrap: break-word;
+        font-size: 15px;
+        color: #1c202c;
+        //box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+        font-family: 'Roboto', sans-serif;
+
+        //&:after {
+        //  content: '';
+        //  position: absolute;
+        //  left: 0;
+        //  top: 50%;
+        //  width: 0;
+        //  height: 0;
+        //  border: 5px solid transparent;
+        //  border-right-color: #ffffff;
+        //  border-left: 0;
+        //  margin-top: -5px;
+        //  margin-left: -5px;
+        //}
+      }
+    }
+    .my_message {
+        display: flex;
+        flex-direction: row-reverse;
+        width: 100%;
+        margin: 10px auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+        align-items: center;
+
+        .prof_img {
+          height: 35px;
+          width: 35px;
+          border-radius: 50%;
+          background-size: cover;
+        }
+
+        .text {
+          max-width: 60%;
+          position: relative;
+          text-align: left;
+          padding: 8px 10px;
+          box-sizing: border-box;
+          background-color: #547dc3;
+          color: white;
+          border-radius: 20px;
+          margin-right: 5px;
+          word-wrap: break-word;
+          font-size: 15px;
+          //box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+          font-family: 'Roboto', sans-serif;
+
+          //&:after {
+          //  content: '';
+          //  position: absolute;
+          //  right: 0;
+          //  top: 50%;
+          //  width: 0;
+          //  height: 0;
+          //  border: 5px solid transparent;
+          //  border-left-color: #ffffff;
+          //  border-right: 0;
+          //  margin-top: -5px;
+          //  margin-right: -5px;
+          //}
+        }
+      }
+    }
+
+    form {
+      margin: 0 auto;
+      background-color: white;
+      box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+      width: 60%;
+      height: 50px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      input {
+        width: 70%;
+        height: 65%;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+        box-sizing: border-box;
+        padding: 5px;
+        margin-right: 10px;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 20px;
+        cursor: pointer;
+
+        &:hover {
+          svg {
+            color: #547dc3;
+          }
+        }
+
+        svg {
+          font-size: 19px;
+          color: #9a9da5;
+          transition: all ease .4s;
+        }
       }
     }
   }
-
-}

@@ -128,9 +128,10 @@
             border-radius: 4px;
             border: 1px solid #c5d0db;
             background-color: white;
-            box-shadow: 0 0 8px 0 #c5d0db;
+            box-shadow: 0 0 8px 0 #888888;
             transition: all ease .3s;
             transform-origin: top;
+            z-index: 500;
 
             &:after,
             &:before {
@@ -206,6 +207,7 @@
     height: 100vh;
     top: 0;
     background-color: rgba(0, 0, 0, 0.64);
+    z-index: 1000;
 
     .upload_div {
       width: 450px;

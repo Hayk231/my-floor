@@ -69,6 +69,17 @@ class Home extends Component {
                 storageRef.child(file.name).getDownloadURL().then((url) => {
                     this.setState({fileUrl: url});
                     this.popImage(url, name);
+                }).then(() => {
+                    firebase.database().ref('/Chat').on('value',snapshot => {
+                        let allChat = snapshot.val();
+                        for (let key in allChat) {
+                            if (allChat[key].name === name) {
+                                firebase.database().ref('Chat/' + key).update({
+                                    image: this.state.fileUrl
+                                }).then(res => {})
+                            }
+                        }
+                    })
                 })
             });
         }
@@ -76,7 +87,6 @@ class Home extends Component {
     };
 
     popImage = (imgUrl, name) => {
-        console.log(imgUrl);
         let userKey = localStorage.getItem('userKey');
         let userRef = firebase.database().ref('userId/' + userKey);
         if (imgUrl) {
