@@ -29,18 +29,16 @@ class Chat extends Component {
             let val = snapshot.val().profPic;
             this.setState({profImg: val});
         });
-            setInterval(() => {
-                firebase.database().ref('/Chat').once('value').then(snapshot => {
-                    let allChat = snapshot.val();
-                    let chatArr = [];
-                    for (let key in allChat) {
-                        let obj = allChat[key];
-                        obj.key = key;
-                        chatArr.push(obj);
-                    }
-                    this.setState({chat: chatArr});
-                })
-            }, 1000);
+        firebase.database().ref('/Chat').on('value',snapshot => {
+            let allChat = snapshot.val();
+            let chatArr = [];
+            for (let key in allChat) {
+                let obj = allChat[key];
+                obj.key = key;
+                chatArr.push(obj);
+            }
+            this.setState({chat: chatArr});
+        })
         // if (this.scrollEnd.current.scrollTop !== this.scrollEnd.current.scrollHeight) {
         //     this.scrollEnd.current.scrollTo({
         //         top: this.scrollEnd.current.scrollHeight,
