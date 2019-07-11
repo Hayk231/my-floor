@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './Chat.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faPhotoVideo } from '@fortawesome/free-solid-svg-icons';
 import firebase from 'firebase';
+import MainInfo from "../../../../components/MainInfo/MainInfo";
 
 class Chat extends Component {
 
@@ -19,7 +21,8 @@ class Chat extends Component {
         name: localStorage.getItem('userName'),
         profImg: null,
         play: false,
-        buttColor: '#9a9da5'
+        buttColor: '#9a9da5',
+        open: false
     };
 
     componentDidMount() {
@@ -76,6 +79,18 @@ class Chat extends Component {
 
     sendMessage = (e) => {
         e.preventDefault();
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        let today = new Date();
+        let month = monthNames[today.getMonth()];
+        let minute = today.getMinutes();
+        if (minute < 10) {
+            minute = '0' + minute;
+        }
+        let date = (month + ' - ' + today.getDate());
+        let time = today.getHours() + ":" + minute;
+        let dateTime = date + ' ' + time;
         this.setState({buttColor: '#9a9da5'});
         let inpVal = this.messInput.current.value;
         if (inpVal !== '') {
@@ -84,7 +99,8 @@ class Chat extends Component {
             firebase.database().ref('Chat').push({
                 name: this.state.name,
                 message: inpVal,
-                image: this.state.profImg
+                image: this.state.profImg,
+                time : dateTime
             }).then(() => {
                 firebase.database().ref('/Chat').once('value').then(snapshot => {
                     let allChat = snapshot.val();
@@ -107,25 +123,44 @@ class Chat extends Component {
         }
     };
 
-    render() {
+    openInfo = () => {
+        this.setState({open: true})
+    };
 
+    handleToggleModal = (e) => {
+        if (e.target.classList.contains('main_info')) {
+            this.setState({
+                open: !this.state.open
+            })
+        }
+    };
+
+    render() {
+        // let info = 'none';
+        // if (this.state.open) {
+        //     info = 'block';
+        // }
         return(
             <div className='chat'>
                 <div className='chat_show' ref={this.scrollEnd}>
                     {this.state.chat.map(el => {
-                        if (el.name === localStorage.getItem('userName')) {
+                        if (el.name === localStorage.getItem('userName') && el.time) {
                             return (
-                                <div key={el.key} className='my_message'>
-                                    <div style={{backgroundImage: `url(${el.image})`}} className='prof_img'></div>
-                                    <div className='text'>
-                                        {/*<span>{el.name}</span>*/}
-                                        <span>{el.message}</span>
+                                <div key={el.key + 'div'}>
+                                    <div key={el.key} className='my_message'>
+                                        <div style={{backgroundImage: `url(${el.image})`}} className='prof_img' title={el.time}></div>
+                                        <div className='text'>
+                                            {/*<span>{el.name}</span>*/}
+                                            <span>{el.message}</span>
+                                        </div>
                                     </div>
-                                </div>)
+                                </div>
+                                )
                         } else {
                             return (
                                 <div key={el.key} className='messages'>
-                                    <div style={{backgroundImage: `url(${el.image})`}} className='prof_img'></div>
+                                    {this.state.open ? <MainInfo toggleModal = {this.handleToggleModal} name={el.name} img={el.image} /> : null}
+                                    <div style={{backgroundImage: `url(${el.image})`}} className='prof_img' title={el.time} onClick={this.openInfo}></div>
                                     <div className='text'>
                                         {/*<span>{el.name}</span>*/}
                                         <span>{el.message}</span>
@@ -136,6 +171,10 @@ class Chat extends Component {
                     })}
                 </div>
                 <form ref={this.clearInput}>
+                    <label className='img_send'>
+                        <FontAwesomeIcon icon={faPhotoVideo}/>
+                        <input type='file'/>
+                    </label>
                     <input type='text' placeholder='Write a message' onKeyPress={this.onKeyPress} ref={this.messInput} onChange={this.buttActive}/>
                     <button onClick={this.sendMessage.bind(this)}><FontAwesomeIcon icon={faPaperPlane} style={{color: this.state.buttColor}}/></button>
                 </form>

@@ -11,7 +11,7 @@
     border-radius: 5px;
     //flex-direction: column;
     background-color: white;
-    box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+    box-shadow: 0 1px 0 0 #aeaeae, 0 0 0 1px #c3c3c3;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     &::-webkit-scrollbar {
@@ -49,6 +49,7 @@
         width: 35px;
         border-radius: 50%;
         background-size: cover;
+        cursor: pointer;
       }
 
       .text {
@@ -63,7 +64,7 @@
         word-wrap: break-word;
         font-size: 15px;
         color: #1c202c;
-        //box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+        //box-shadow: 0 1px 0 0 #aeaeae, 0 0 0 1px #e3e4e8;
         font-family: 'Roboto', sans-serif;
 
         //&:after {
@@ -95,6 +96,7 @@
           width: 35px;
           border-radius: 50%;
           background-size: cover;
+          cursor: pointer;
         }
 
         .text {
@@ -109,7 +111,7 @@
           margin-right: 5px;
           word-wrap: break-word;
           font-size: 15px;
-          //box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+          //box-shadow: 0 1px 0 0 #aeaeae, 0 0 0 1px #e3e4e8;
           font-family: 'Roboto', sans-serif;
 
           //&:after {
@@ -127,12 +129,16 @@
           //}
         }
       }
+
+    .show_date {
+      font-size: 12px;
+    }
     }
 
     form {
       margin: 0 auto;
       background-color: white;
-      box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+      box-shadow: 0 1px 0 0 #aeaeae, 0 0 0 1px #c3c3c3;
       width: 60%;
       height: 50px;
       border-bottom-left-radius: 5px;
@@ -142,15 +148,35 @@
       align-items: center;
       position: relative;
 
+      .img_send {
+        position: absolute;
+        left: 19px;
+        cursor: pointer;
+
+        svg {
+          color: #9a9da5;
+          transition: all ease .3s;
+          font-size: 19px;
+          &:hover {
+            color: #547dc3;
+            transform: scale(1.2);
+          }
+        }
+
+        input {
+          display: none;
+        }
+      }
+
       input {
         width: 70%;
         height: 65%;
         border: none;
         border-radius: 5px;
-        box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+        box-shadow: 0 1px 0 0 #aeaeae, 0 0 0 1px #c3c3c3;
         box-sizing: border-box;
         padding: 5px;
-        margin-right: 10px;
+        margin-right: 5px;
       }
 
       button {
