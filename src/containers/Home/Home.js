@@ -51,10 +51,12 @@ class Home extends Component {
             this.setState({profImg: val});
         });
         this.setState({name: localStorage.getItem('userName').split(' ')[0]})
+
     }
 
     uploadImage = () => {
         let name = this.changeRef.current.value ? this.changeRef.current.value : localStorage.getItem('userName');
+        let id = localStorage.getItem('userKey');
         if (name) {
             localStorage.setItem('userName', name);
             this.setState({name: name});
@@ -73,9 +75,10 @@ class Home extends Component {
                     firebase.database().ref('/Chat').on('value',snapshot => {
                         let allChat = snapshot.val();
                         for (let key in allChat) {
-                            if (allChat[key].name === name) {
+                            if (allChat[key].key === id) {
+                                debugger;
                                 firebase.database().ref('Chat/' + key).update({
-                                    image: this.state.fileUrl
+                                    image: this.state.fileUrl,
                                 }).then(res => {})
                             }
                         }
@@ -185,6 +188,7 @@ class Home extends Component {
             editable = false;
             showed_text = 'showed_text';
         }
+        console.log(this.state.name);
 
         return (
             <Fragment>

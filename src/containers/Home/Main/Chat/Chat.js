@@ -66,7 +66,6 @@ class Chat extends Component {
                         });
                     });
                 }
-
         }
     }
 
@@ -100,7 +99,8 @@ class Chat extends Component {
                 name: this.state.name,
                 message: inpVal,
                 image: this.state.profImg,
-                time : dateTime
+                time : dateTime,
+                key: localStorage.getItem('userKey')
             }).then(() => {
                 firebase.database().ref('/Chat').once('value').then(snapshot => {
                     let allChat = snapshot.val();
@@ -136,10 +136,6 @@ class Chat extends Component {
     };
 
     render() {
-        // let info = 'none';
-        // if (this.state.open) {
-        //     info = 'block';
-        // }
         return(
             <div className='chat'>
                 <div className='chat_show' ref={this.scrollEnd}>
@@ -150,7 +146,6 @@ class Chat extends Component {
                                     <div key={el.key} className='my_message'>
                                         <div style={{backgroundImage: `url(${el.image})`}} className='prof_img' title={el.time}></div>
                                         <div className='text'>
-                                            {/*<span>{el.name}</span>*/}
                                             <span>{el.message}</span>
                                         </div>
                                     </div>
@@ -162,7 +157,6 @@ class Chat extends Component {
                                     {this.state.open ? <MainInfo toggleModal = {this.handleToggleModal} name={el.name} img={el.image} /> : null}
                                     <div style={{backgroundImage: `url(${el.image})`}} className='prof_img' title={el.time} onClick={this.openInfo}></div>
                                     <div className='text'>
-                                        {/*<span>{el.name}</span>*/}
                                         <span>{el.message}</span>
                                     </div>
                                 </div>)
