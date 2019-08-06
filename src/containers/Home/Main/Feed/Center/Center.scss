@@ -1,0 +1,114 @@
+.feed_center {
+  width: 56%;
+  //height: 500px;
+  box-sizing: border-box;
+
+  .add_post {
+    width: 100%;
+    //height: 105px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 0 #b9babd, 0 0 0 1px #c2c3c5;
+
+    .post_head {
+      width: 100%;
+      height: 27px;
+      padding: 7px;
+      box-sizing: border-box;
+      text-align: left;
+      font-size: 12px;
+      background-color: #f5f6f7;
+      border-bottom: 1px solid #dddfe2;
+      border-radius: 4px 4px 0 0;
+      font-weight: bold;
+      color: #243748;
+    }
+    .post_info {
+      height: 55px;
+      width: 100%;
+      border-bottom: 1px solid #dddfe2;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      box-sizing: border-box;
+
+      div:first-child {
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+
+        div {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          background-size: cover;
+          background-position: center;
+        }
+      }
+      div:last-child {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        input {
+          border: none;
+          width: 100%;
+          height: 100%;
+          font-size: 15px;
+        }
+      }
+    }
+
+    .post_tools {
+      width: 100%;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 15px;
+      box-sizing: border-box;
+
+      div {
+        svg {
+          margin: 0 7px;
+          color: #9cb2ca;
+          cursor: pointer;
+          transition: all ease .4s;
+          font-size: 18px;
+
+          &:hover {
+            color: #5081b8;
+          }
+        }
+      }
+
+      button {
+        border: none;
+        color: white;
+        background-color: #9cb2ca;
+        transition: all ease .4s;
+        font-size: 12.5px;
+        padding: 6px 16px;
+        border-radius: 4px;
+        margin-right: 2px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #5081b8;
+        }
+      }
+    }
+  }
+
+  .center_cont {
+    width: 100%;
+    //height: 380px;
+    //background-color: white;
+    margin-top: 30px;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 0 #b9babd, 0 0 0 1px #c2c3c5;
+  }
+}

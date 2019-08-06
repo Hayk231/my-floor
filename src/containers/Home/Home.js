@@ -61,6 +61,16 @@ class Home extends Component {
             localStorage.setItem('userName', name);
             this.setState({name: name});
             this.popImage(null, name);
+            firebase.database().ref('/Chat').once('value').then(snapshot => {
+                let allChat = snapshot.val();
+                for (let key in allChat) {
+                    if (allChat[key].key === id) {
+                        firebase.database().ref('Chat/' + key).update({
+                            name: name
+                        }).then(res => {})
+                    }
+                }
+            })
         }
         const file = this.imageInput.current.files[0];
         if (file) {
@@ -72,11 +82,10 @@ class Home extends Component {
                     this.setState({fileUrl: url});
                     this.popImage(url, name);
                 }).then(() => {
-                    firebase.database().ref('/Chat').on('value',snapshot => {
+                    firebase.database().ref('/Chat').once('value').then((snapshot) => {
                         let allChat = snapshot.val();
                         for (let key in allChat) {
                             if (allChat[key].key === id) {
-                                debugger;
                                 firebase.database().ref('Chat/' + key).update({
                                     image: this.state.fileUrl,
                                 }).then(res => {})
@@ -188,7 +197,6 @@ class Home extends Component {
             editable = false;
             showed_text = 'showed_text';
         }
-        console.log(this.state.name);
 
         return (
             <Fragment>
@@ -249,7 +257,7 @@ class Home extends Component {
                     </div>
                     {changeComp}
                 </div>
-                <Main name={this.state.name}/>
+                <Main name={this.state.name} imgUrl={this.state.profImg}/>
             </Fragment>
 
         );

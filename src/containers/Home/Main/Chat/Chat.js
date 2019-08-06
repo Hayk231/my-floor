@@ -22,7 +22,10 @@ class Chat extends Component {
         profImg: null,
         play: false,
         buttColor: '#9a9da5',
-        open: false
+        open: false,
+        img: '',
+        typeShow: false,
+        inpVal: null
     };
 
     componentDidMount() {
@@ -50,6 +53,9 @@ class Chat extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.typeShow) {
+            alert('ccc')
+        }
         if (prevState.chat.length < this.state.chat.length && prevState.chat.length !== 0) {
                 if (this.state.chat[this.state.chat.length-1].name === this.state.name) {
                     let audio = new Audio('/Images/notif-send.mp3');
@@ -67,6 +73,14 @@ class Chat extends Component {
                     });
                 }
         }
+        // let val = this.state.inpVal;
+        // if (val) {
+        //     this.setState({typeShow: true});
+        //     if (val === '') {
+        //         this.setState({typeShow: false});
+        //     }
+        // }
+
     }
 
     onKeyPress = (e) => {
@@ -74,6 +88,9 @@ class Chat extends Component {
             this.sendMessage(e);
             this.clearInput.current.reset();
         }
+        // else  {
+        //     console.log('typing')
+        // }
     };
 
     sendMessage = (e) => {
@@ -135,7 +152,34 @@ class Chat extends Component {
         }
     };
 
+    saveImage = (e) => {
+        if (e.target.files[0]) {
+            this.setState({img: URL.createObjectURL(e.target.files[0])})
+        }
+    };
+
+    keyDownHandler = (e) => {
+        let val = e.target.value;
+        this.setState({inpVal: e.target.value});
+        this.scrollEnd.current.scrollTo({
+            top: this.scrollEnd.current.scrollHeight,
+        });
+        this.setState({typeShow: true});
+        if (val === '') {
+            this.setState({typeShow: false});
+        }
+    };
+
+    cancelType = () => {
+        this.setState({typeShow: false})
+    };
+
     render() {
+        let type = '0';
+        if (this.state.typeShow) {
+            type = '40px';
+        }
+
         return(
             <div className='chat'>
                 <div className='chat_show' ref={this.scrollEnd}>
@@ -147,6 +191,7 @@ class Chat extends Component {
                                         <div style={{backgroundImage: `url(${el.image})`}} className='prof_img' title={el.time}></div>
                                         <div className='text'>
                                             <span>{el.message}</span>
+                                            {/*<div style={{backgroundImage: `url(${this.state.img})`}}></div>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -161,15 +206,22 @@ class Chat extends Component {
                                     </div>
                                 </div>)
                         }
-
                     })}
+                    <div style={{height: type}} className='type_div'>
+                        <div className="typing-indicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                 </div>
                 <form ref={this.clearInput}>
+                    {/*<div className='type_show'>Typing</div>*/}
                     <label className='img_send'>
                         <FontAwesomeIcon icon={faPhotoVideo}/>
-                        <input type='file'/>
+                        <input type='file' onChange={this.saveImage}/>
                     </label>
-                    <input type='text' placeholder='Write a message' onKeyPress={this.onKeyPress} ref={this.messInput} onChange={this.buttActive}/>
+                    <input type='text' placeholder='Write a message' onKeyPress={this.onKeyPress} ref={this.messInput} onChange={this.buttActive} onKeyDown={this.keyDownHandler} onBlur={this.cancelType}/>
                     <button onClick={this.sendMessage.bind(this)}><FontAwesomeIcon icon={faPaperPlane} style={{color: this.state.buttColor}}/></button>
                 </form>
             </div>
