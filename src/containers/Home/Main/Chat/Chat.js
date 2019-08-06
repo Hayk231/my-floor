@@ -88,9 +88,6 @@ class Chat extends Component {
             this.sendMessage(e);
             this.clearInput.current.reset();
         }
-        // else  {
-        //     console.log('typing')
-        // }
     };
 
     sendMessage = (e) => {

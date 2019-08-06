@@ -47,7 +47,7 @@ class Login extends Component {
                             this.props.saveHandler(this.state.saved);
                             this.localAddHandler(this.state.saved, val[key].name, key);
                             this.setState({spinner: false});
-                            this.props.history.push('/home');
+                            this.props.history.push('/home/feed');
                         }
                     }
                 });
