@@ -17,6 +17,7 @@ class Post extends Component {
                     <span>
                         {this.props.data.content}
                     </span>
+                    <div></div>
                 </div>
             </div>
         );

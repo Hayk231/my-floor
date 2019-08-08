@@ -3,11 +3,12 @@
   .prof_head {
     width: 100%;
     height: 45px;
-    //background-color: #4a75a8;
     background-color: #243748;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    position: fixed;
+    top: 0;
 
     .prof_cont {
       height: 100%;

@@ -34,6 +34,12 @@ class Center extends Component {
         })
     }
 
+    enterPost = (e) => {
+        if (e.keyCode === 13) {
+            this.postAddHandler();
+        }
+    };
+
     postAddHandler = () => {
         let time = moment().format('MMMM Do, h:mm a');
 
@@ -51,7 +57,9 @@ class Center extends Component {
                     for (let key in allPosts) {
                         postArr.unshift(allPosts[key]);
                     }
-                    this.setState({allPosts: postArr})
+                    this.setState({allPosts: postArr});
+                    this.inputTitle.value = "";
+                    this.setState({content: ''})
                 })
             })
         }
@@ -76,7 +84,8 @@ class Center extends Component {
                                 <div style={{backgroundImage: `url("${this.state.data.profPic}")`}}> </div>
                             </div>
                             <div>
-                                <input type='text' placeholder="What's New" onChange={this.getText}/>
+                                <input type='text' placeholder="What's New" ref={el => this.inputTitle = el}
+                                       onChange={this.getText} onKeyDown={this.enterPost}/>
                             </div>
                         </div>
                         <div className='post_tools'>
