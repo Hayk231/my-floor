@@ -4,10 +4,15 @@ import './Post.scss';
 class Post extends Component {
 
     render() {
+        let image = null;
+        if (this.props.data.postImg) {
+            image = <div style={{backgroundImage: `url('${this.props.data.postImg}')`}}> </div>
+        }
+
         return (
             <div className='post'>
                 <div className='post_info'>
-                    <div style={{backgroundImage: `url('${this.props.data.image}')`}}></div>
+                    <div style={{backgroundImage: `url('${this.props.data.image}')`}}> </div>
                     <div>
                         <span>{this.props.data.name}</span>
                         <span>{this.props.data.time}</span>
@@ -17,7 +22,7 @@ class Post extends Component {
                     <span>
                         {this.props.data.content}
                     </span>
-                    <div></div>
+                    {image}
                 </div>
             </div>
         );

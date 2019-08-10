@@ -5,6 +5,7 @@ import Settings from '../Main/Settings/Settings';
 import Feed from '../Main/Feed/Feed';
 import Profile from "./Profile/Profile";
 import Chat from "./Chat/Chat";
+import Users from "./Users/Users";
 
 class Main extends Component {
     render() {
@@ -15,6 +16,7 @@ class Main extends Component {
                     <Route exact path='/home/feed' component={Feed}/>
                     <Route exact path='/home/settings' component={Settings}/>
                     <Route exact path='/home/chat' component={Chat}/>
+                    <Route exact path='/home/users' component={Users}/>
                 </Switch>
             </div>
         );
