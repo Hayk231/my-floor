@@ -165,6 +165,10 @@ class Home extends Component {
         }
     };
 
+    gotoTop = () => {
+        window.scrollTo(0, 0);
+    };
+
     render() {
         let show = 'none';
         if (this.state.show) {
@@ -203,7 +207,7 @@ class Home extends Component {
                 <div className='Profile'>
                 <div className='prof_head'>
                     <div className='prof_cont'>
-                        <Link to={'/home/feed'}>
+                        <Link to={'/home/feed'} onClick={this.gotoTop}>
                             <div className='logo'>
                                 <FontAwesomeIcon icon={faUserAstronaut}/>
                                 <FontAwesomeIcon icon={faMeteor}/>
