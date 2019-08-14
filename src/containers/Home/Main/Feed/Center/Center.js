@@ -31,6 +31,7 @@ class Center extends Component {
                 let allPosts = snapshot.val();
                 let postArr = [];
                 for (let key in allPosts) {
+                    allPosts[key].id = key;
                     postArr.unshift(allPosts[key]);
                 }
                 this.setState({allPosts: postArr})
@@ -79,6 +80,7 @@ class Center extends Component {
                     let allPosts = snapshot.val();
                     let postArr = [];
                     for (let key in allPosts) {
+                        allPosts[key].id = key;
                         postArr.unshift(allPosts[key]);
                     }
                     this.setState({allPosts: postArr});

@@ -61,4 +61,58 @@
       background-size: cover;
     }
   }
+
+  form {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto 0 auto;
+    padding-top: 10px;
+    border-top: 1px solid #e7e8ec;
+
+    .img_send {
+      cursor: pointer;
+
+      svg {
+        color: #c2c5cd;
+        transition: all ease .3s;
+        font-size: 19px;
+        &:hover {
+          color: #547dc3;
+          transform: scale(1.2);
+        }
+      }
+
+      input {
+        display: none;
+      }
+    }
+
+    input {
+      width: 80%;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 1px 0 0 #aeaeae, 0 0 0 1px #c3c3c3;
+      padding: 6px;
+      margin-left: 5px;
+    }
+
+    button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        svg {
+          color: #547dc3;
+        }
+      }
+
+      svg {
+        font-size: 19px;
+        transition: all ease .4s;
+      }
+    }
+  }
 }

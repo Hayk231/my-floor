@@ -53,9 +53,6 @@ class Chat extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.state.typeShow) {
-            alert('ccc')
-        }
         if (prevState.chat.length < this.state.chat.length && prevState.chat.length !== 0) {
                 if (this.state.chat[this.state.chat.length-1].name === this.state.name) {
                     let audio = new Audio('/Images/notif-send.mp3');
@@ -213,7 +210,6 @@ class Chat extends Component {
                     </div>
                 </div>
                 <form ref={this.clearInput}>
-                    {/*<div className='type_show'>Typing</div>*/}
                     <label className='img_send'>
                         <FontAwesomeIcon icon={faPhotoVideo}/>
                         <input type='file' onChange={this.saveImage}/>
