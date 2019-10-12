@@ -68,8 +68,9 @@
     justify-content: space-between;
     align-items: center;
     margin: 20px auto 0 auto;
-    padding-top: 10px;
+    padding: 10px 0 10px 0;
     border-top: 1px solid #e7e8ec;
+    border-bottom: 1px solid #e7e8ec;
 
     .img_send {
       cursor: pointer;
@@ -114,5 +115,40 @@
         transition: all ease .4s;
       }
     }
+  }
+
+  .comment_cont {
+    margin-top: 15px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+    word-wrap: break-word;
+
+    .comm_info {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      
+      div:first-child {
+        width: 30px;
+        height: 30px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+      }
+      div:last-child {
+        margin-left: 20px;
+
+        span {
+          word-wrap: break-word;
+          padding: 5px;
+          border-radius: 15px;
+          background-color: #2a4b87;
+        }
+      }
+    }
+
+
   }
 }

@@ -64,6 +64,18 @@ class Post extends Component {
                     <input type='text' placeholder='Write a message' onKeyPress={this.onKeyPress} ref={this.messInput} onChange={this.buttActive} onKeyDown={this.keyDownHandler}/>
                     <button onClick={this.sendMessage}><FontAwesomeIcon icon={faPaperPlane} style={{color: this.state.buttColor}}/></button>
                 </form>
+                <div className='comment_cont'>
+                    <div className='comm_info'>
+                        <div style={{backgroundImage: `url('${this.props.data.image}')`}}> </div>
+                        <div>
+                            {/*<span>{this.props.data.name}</span>*/}
+                            <span>{this.props.data.content}</span>
+                        </div>
+                    </div>
+                    {/*<div className='comm_cont'>*/}
+                    {/*    /!*<span>{this.props.data.time}</span>*!/*/}
+                    {/*</div>*/}
+                </div>
             </div>
         );
     }
